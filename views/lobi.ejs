@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lobi - Enki Huzurculuk</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/site.css"  type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Josefin+Slab|Poiret+One|Quicksand" rel="stylesheet">
+
+</head>
+<body>
+<div class="blockDiv gizle"></div>
+
+<nav class="navbar navbar-default header">
+    <div class="container-fluid ">
+        <div class="navbar-header logo">
+            <a href="index">Enki</a>
+            <a href="lobi">Lobi</a>
+            <a href="chat">Chat</a>
+        </div>
+    </div>
+</nav>
+
+<div id ="govde" class="container govde">
+
+
+    <script>
+        document.getElementById('govde').innerHTML = "Hoşgeldin : <%= usrn %>" ;
+    </script>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>UserName</th>
+            <th>E-posta</th>
+            <th>ProblemID</th>
+        </tr>
+        <tr>
+            <td><script>document.write("<%= usrID %>")</script></td>
+            <td><script>document.write("<%= usrn %>")</script></td>            
+            <td><script>document.write("<%= usrEmail %>")</script></td> 
+            <td><script>document.write("<%= usrProblemID %>")</script></td>
+        </tr>
+    </table>
+    <!-- Öylesine tabloyu daha iyi görmek için yazıldı bu css kaldırılacak -->
+    <style>
+        table{
+            border:1px solid gray;
+        }
+        tr{
+            margin: 3px;
+            transition: 0.3s;
+        }
+        tr:Hover{
+            color:white;
+            background-color: #204d74;
+            font-size: 14px;
+        }
+        th{
+            transition: 0.3s;
+            padding: 10px;
+            text-align: center;
+        }
+        th:hover{
+            color:white;
+            font-size: 14px;
+        }
+        td{
+            text-align: center;
+            border:1px solid gray;
+            padding: 8px;
+        }
+    </style>
+
+
+
+
+
+</div>
+
+<footer class="container">
+    <hr />
+    <p class="footer-brand col-lg-8 col-md-8 col-xs-12">&copy; 2017 - <a href="index">Enki</a></p>
+    <p class="col-lg-2 col-md-2 col-xs-12 footer-info"><a href="contact">İletişim</a></p>
+    <p class="col-lg-2 col-md-2 col-xs-12 footer-info"><a href="about">Detaylı Bilgi</a></p>
+</footer>
+
+
+<script src="http://enki.rehberartvin.com/lib/jquery/dist/jquery.js"></script>
+<script src="javascripts/site.js"></script>
+</body>
+</html>

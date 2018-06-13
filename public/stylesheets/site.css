@@ -1,0 +1,610 @@
+﻿html {
+}
+
+body {
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
+    background-color: #f6f6f6;
+    margin: 0px;
+    /*//font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    font-family: 'Quicksand', sans-serif;
+    /*//font-family: 'Josefin Slab', serif;*/
+    /*//font-family: 'Poiret One', cursive;*/
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 100;
+    letter-spacing: .5px;
+    line-height: 1.5;
+    margin: 0 0 10px;
+}
+
+h2 {
+    font-size: 46px;
+    color: #2d2c2c;
+}
+
+h3 {
+    font-size: 30px;
+    color: #b3b3b3;
+}
+
+p {
+    margin: 0 0 10px;
+    color: #b3b3b3;
+    font-size: 17px;
+    line-height: 2;
+}
+
+a {
+    color: #2d2c2c;
+}
+    a:hover {
+        text-decoration-color:steelblue;
+    }
+.navbar-header a {
+    float: left;
+    line-height: 20px;
+    font-size: 18px;
+    color: #777;
+    height: 50px;
+    padding: 15px 15px;
+    text-decoration-line: none !important;
+}
+.header {
+    background-color: white;
+    padding: 15px;
+    letter-spacing: 1.5px;
+}
+
+.navbar {
+    border-radius: 0px !important;
+    z-index:1;
+}
+
+.logo {
+}
+
+.govde {
+    transition: width 2s;
+    margin-top: 5.5%;
+    /*// 8.9%;*/
+    /*//background-color: darkolivegreen !important;*/
+}
+.govdeChat {
+    transition: width 2s;
+    margin-top: 0.2%;
+}
+
+.b1 {
+    margin: 20% 0;
+}
+
+.b2 {
+    width: 100%;
+    color: gray;
+    text-align: center;
+    border-left: 1px solid gray;
+    border-bottom: 0px solid gray;
+    border-right: 1px solid gray;
+    border-top: 1px solid gray;
+    margin: auto;
+    background: linear-gradient( #f6f6f6,white,#f6f6f6);
+    /*//#ab48cc*/
+}
+
+select {
+    box-shadow: none;
+    transition: box-shadow 1.2s;
+    color: #999999 !important;
+}
+   select:focus {
+        box-shadow: 0px 0px 25px black !important;
+        border-bottom: 1px solid gray !important;
+        transition: box-shadow 1.3s ease-in-out 10s;
+    }
+
+.logo:hover {
+    color: yellowgreen;
+}
+
+.loginBox-Top {
+    width: 100%;
+    /* //border: 1px solid white;*/
+    color: #2d2c2c;
+    font-size: 20px;
+    text-align: left;
+    padding: 33px;
+}
+
+.loginBox-Top-Header {
+    letter-spacing: .5px;
+    line-height: 1.9;
+    margin-bottom: 10px;
+}
+
+.loginBox-Top-Options {
+    float: right;
+    font-size: 30px;
+    color: #1af709;
+    padding: 15px;
+    transition: transform 1.2s;
+    z-index: 10
+}
+
+    .loginBox-Top-Options:Hover {
+        transform: rotate(360deg);
+    }
+
+.filtrInput {
+    margin-top: 3px;
+    border: 2px solid black;
+    color: gray;
+}
+
+.blockDiv {
+    background-color: rgba(0,0,0,0.1);
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    z-index: 9
+}
+
+.gizle {
+    display: none !important;
+}
+
+.text-Align-right {
+    text-align: right;
+}
+
+.loginBox-Content {
+    padding: 25px;
+}
+input {
+    box-shadow: none;
+    transition: box-shadow 1.2s;
+}
+   input:focus {
+        box-shadow: 0px 0px 25px black !important;
+        border-bottom: 1px solid gray !important;
+        transition: box-shadow 1.3s ease-in-out 10s;
+    }
+/*div {
+    box-shadow: none;
+    transition: box-shadow 1.2s;
+}                                                        //           Güzel Animasyon
+
+    div:hover {
+        box-shadow: 0 0 3px red;
+        transition: box-shadow 3.2s;
+    }*/
+
+.input-width100 {
+    width: 100%;
+}
+
+.input-Custom {
+    background-color: rgba(255,255,255,0.0);
+    border-left: 1px solid gray !important;
+    border-bottom: 1px solid gray ;
+    border-right: 0px solid gray ;
+    border-top: 0px solid gray;
+    box-shadow: inset 0 0px 0px rgba(0, 0, 0, .0);
+    border-radius: 0px !important;
+}
+
+.loginBox-Top-input-Custom {
+    height: 55px !important;
+    background-color: rgba(255,255,255,0.0);
+    color: black;
+    border-radius: 0px !important;
+    border-bottom: 1px solid gray;
+    border-right: 0px solid gray;
+    border-left: 0px solid gray;
+    border-top: 0px solid gray;
+    box-shadow: inset 0 0px 0px rgba(0, 0, 0, .0);
+}
+
+.input-Custom-span {
+    border-bottom: 1px solid gray;
+    border-right: 0px solid gray;
+    border-left: 0px solid gray;
+    border-top: 0px solid gray;
+    background-color: rgba(0,0,0,0);
+    border-radius: 0px !important;
+    font-size: 15px !important;
+}
+
+.input-Button-Custom {
+    font-size: 2.5em;
+    border-radius: 50px;
+    border-color: #1af709;
+    background-color: #1af709;
+    color: #fff;
+}
+
+.input-Button-Send-Padding {
+    /*//margin:0 10px;*/
+    top:5px !important;
+    right:7px !important;
+}
+
+.input-Buton-Value {
+    margin-right: 5px;
+}
+
+hr {
+    background-color: gray;
+    height: 1px;
+}
+
+footer p {
+    color: #2d2c2c;
+}
+
+.footer-info {
+    /*//border-right: 1px solid gray;*/
+    text-align: right;
+}
+
+/*.ChatBackground {
+    border: 1px solid gray;
+    height: 780px;
+    overflow: scroll;
+    overflow-x:hidden;
+}*/
+.ChatBackground {
+   /* //border: 1px solid gray;*/
+    margin:2px;
+    margin-left: 30px;
+   /*// float: left;*/
+    height: 700px;
+    width: 100%;
+    background:  #ffffff; /*//#F5F5F5;*/
+    overflow-y: scroll;
+    overflow-x:hidden;
+    /*//margin-bottom: 25px;*/
+    text-align:center;
+    padding-top:16%;
+}
+.MsjText {
+    /*width:100%;
+    height:50px;*/
+}
+.MsjTextInput {
+    border: 1px solid rgba(217, 217, 217, 1);
+    background-color: white;
+    border-left: 3px solid gray !important;
+    height: 85px !important;
+    width: 100% !important;
+    border-radius: 0px !important;
+    padding-right: 5.8% !important;
+}
+    .MsjTextInput:focus {
+        border: 0px !important;
+    }
+
+.SendBtn {
+    position: absolute;
+    z-index: 10000;
+    padding-top: 3%;
+    right: 1px;
+    height: 100%;
+    width: 5%;
+    text-align: center;
+    transition:box-shadow 0.5s;
+}
+    .SendBtn:hover {
+        cursor: pointer;
+        box-shadow: 0px 0px 25px #000 !important;
+        
+    }
+.force-overflow {
+    margin: 5px;
+    /*//min-height: 1000px;*/
+}
+#ChatBackground::-webkit-scrollbar-track {
+    /*//-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    //border-radius: 10px;*/
+    background-color: #F5F5F5;
+    transition: width 1s;
+}
+
+#ChatBackground::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+#ChatBackground::-webkit-scrollbar-thumb {
+    /*//border-radius: 10px;*/
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: gray;
+}
+
+.GidenMsj {
+    background: #dcf8c6;
+    text-align: left;
+    border-radius: 7px 7px 0px 7px;
+    padding: 5px 25px 5px 10px;
+    float: right;
+    width: auto;
+    box-shadow: -1px 1px 1px -1px rgba(0,0,0,0.75);
+}
+
+.GelenMsj {
+    /*//background: rgb(81, 196, 239);*/
+    border:1px solid green;
+    text-align: left;
+    border-radius: 7px 7px 7px 0px;
+    padding: 5px 10px 5px 25px;
+    float: left;
+    width: auto;
+}
+
+.MaxWidth {
+    transition: max-width 2s;
+    width:auto;
+    max-width: 65%;
+}
+
+.MsjBackDiv {
+    width: 100%;
+    min-height: 5px;
+    padding: 2px 10% 1px 10%;
+    word-wrap: break-word;
+}
+    .MsjBackDiv:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+.MsjBoxTopBlur {
+    width: 97.5%;
+    height: 15%;
+    background: linear-gradient( rgba(246, 246, 246, 1),rgba(255, 255, 255, 0.0));
+    z-index: 1;
+    top: 0;
+    position: absolute;
+}
+.Time{
+    margin-left:10px;
+    font-size:small;
+    font-weight:bold;
+}
+.Time2 {
+    margin-right: 10px;
+    font-size: small;
+    font-weight: bold;
+}
+.Clear{
+    clear:both;
+}
+
+.Right {
+    margin-left: auto;
+}
+.Left {
+    margin-right: auto;
+}
+.User-About {
+   /* //bottom: 10px;*/
+    right: 15px;
+    position: fixed;
+    z-index: 999999999;
+    padding:10px;
+    padding-bottom:0px;
+    border:1px solid gray;
+    border-radius:10px 10px 0 0 ;
+}
+.User-About-custom{
+    font-size:100px; 
+    top:12px;
+    transition:1s;
+}
+
+.solKanat {
+    /*//transform: rotateX(90deg);*/
+}
+.sagKanat{
+
+}
+.User-Info{
+
+}
+
+.lobi {
+    cursor: url("../images/pizza.png"), auto;
+}
+
+@media screen and (max-width: 1444px) and (min-height: 895px) {
+    .User-About-custom {
+        font-size: 50px;
+        top: 8px
+    }
+}
+
+@media screen and (max-width: 1325px) and (min-height: 895px) {
+    .User-About-custom {
+        font-size: 30px;
+        top: 7px
+    }
+}
+
+@media screen and (max-height: 895px) {
+    .User-About {
+        top: 5px;
+        right:5px;
+    }
+    .User-About-custom {
+        font-size: 25px;
+        top: 7px
+    }
+}
+
+@media screen and (max-width: 1282px) and (min-height: 895px) {
+    .User-About {
+        top: 15px;
+        /*//right: 15px;*/
+    }
+
+    .User-About-custom {
+        font-size: 35px;
+        top: 7px
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .input-Button-Custom {
+        font-size: 2.0em;
+    }
+    .MaxWidth{
+        max-width:70%;
+    }
+    .MsjBackDiv {
+        padding: 2px 5%;
+    }
+    .SendBtn {
+        padding-top: 5.5%;
+    }
+}
+
+
+
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 768px) {
+    .b1 {
+        text-align: center;
+        margin: 10% 0 20% 0;
+    }
+
+    .b2 {
+        width: 100%;
+    }
+
+    .logo {
+        text-align: center !important;
+    }
+
+    .loginBox-Top {
+        padding: 7px;
+    }
+
+    .loginBox-Top-Header {
+        font-size: 18px;
+    }
+
+    .loginBox-Top-Options {
+        font-size: 20px;
+    }
+
+    .loginBox-Content {
+        padding: 16px 8px;
+    }
+
+    .loginBox-Top-input-Custom {
+        height: 60px !important;
+        border-left: 0px solid gray;
+    }
+
+    .input-Button-Custom {
+        font-size: 1.5em;
+    }
+
+    footer p {
+        text-align: center !important;
+    }
+    .MaxWidth {
+        max-width: 80%;
+    }
+    .MsjBackDiv {
+        padding: 2px 5%;
+    }
+    /*nav{
+        display:none !important;
+    }*/
+    .SendBtn {
+        padding-top: 6.5%;
+    }
+       
+}
+
+@media screen and (max-width: 425px) {
+    
+    .SendBtn {
+        padding-top: 9.5%;
+        padding-right: 8%;
+        padding-left: 3%;
+    }
+    #ChatBackground::-webkit-scrollbar {
+        width: 3px;
+    }
+    .Time {
+        font-size: x-small;
+    }
+
+    .Time2 {
+        font-size: x-small;
+    }
+}
+@media screen and (max-width: 320px)  {
+    .SendBtn {
+        padding-top: 12.5%;
+    }
+}
+
+@media screen and (max-height: 895px) {
+    nav {
+        position: fixed;
+    }
+
+    .govdeChat {
+        margin: 0px;
+    }
+
+    .navbar {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .ChatBackground {
+        width: 100%;
+        /*//top:0px;*/
+        left: 0px;
+        right: 0px;
+       /* //bottom:0px;*/
+        position: fixed;
+        padding-top: 1%;
+        padding-bottom: 90px;
+        height: 90%;
+        margin: 0px;
+    }
+
+    .MsjText {
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        position: fixed;
+        width: 100%;
+    }
+
+    .MsjBoxTopBlur {
+        display: none;
+    }
+}
+/*@media screen and (min-height: 748px) and (min-width:1024px) {
+    .ChatBackground {
+        height:550px;
+    }
+}
+
+    @media screen and (min-height: 974px) {
+        .ChatBackground {
+            height: 750px;
+        }
+}
+    /*895px*/   
