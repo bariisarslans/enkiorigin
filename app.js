@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var _ = require('underscore');
 var location = require("./location"); // Buralar ayrı modüllere geçince kaldırılacak.
 var mac = require("getmac"); // Buralar ayrı modüllere geçince kaldırılacak.
-var analysisEngine = require("./analysisEngine"); 
+var analysisEngine = require("./analysisEngine");
 var PORT = process.env.PORT || 3000;
 var IP,MAC; // Buralar ayrı modüllere geçince kaldırılacak.
 
@@ -57,16 +57,16 @@ app.post("/lobi", function(req, res){
     });
   });
 
-  app.get('/index', function(req, res, next) {
+  app.get('/index', function(req, res) {
     res.render('index', { title: 'Express' });
   });
 
-  app.get('/', function(req, res, next) {
+  app.get('/', function(req, res) {
     console.log("v1");
     res.render('index', { title: 'Express' });
   });
   
-  app.get('/lobi', function(req, res, next) {
+  app.get('/lobi', function(req, res) {
     console.log("lobi/get çalıştı");
     db.users.findAll({
         where:{
@@ -78,11 +78,11 @@ app.post("/lobi", function(req, res){
     //res.render("lobi");
   });
 
-  app.get('/lobi', function(req, res, next) {
+  app.get('/lobi', function(req, res) {
     res.render("lobi");
   });
   
-  app.get('/chat', function(req, res, next) {
+  app.get('/chat', function(req, res) {
     res.render("chat");
   });
 
