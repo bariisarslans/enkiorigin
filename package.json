@@ -1,6 +1,6 @@
 {
   "name": "web-server",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -20,5 +20,9 @@
     "request": "^2.87.0",
     "sequelize": "^4.37.10",
     "underscore": "^1.9.0"
+  },
+  "engines": {
+    "node": "v8.11.1",
+    "npm": "5.6.0"
   }
 }

@@ -108,7 +108,7 @@ app.listen(PORT, function(){
   console.log("Express listening on "+ PORT);
 });
 
-/* // Burası veritabanı sıfırdan oluşması için default hali ayarlanabilir.
+ // Burası veritabanı sıfırdan oluşması için default hali ayarlanabilir.
 db.sequelize.sync({ force : false}).then(function(){
   console.log("DB baglantısı ve kurulumu başarılı");
  
@@ -117,5 +117,5 @@ db.sequelize.sync({ force : false}).then(function(){
   console.log(err);
   console.log("DB baglantısı veya kurulumu başarısız.");
 })
-*/
+
 module.exports = app;
