@@ -122,6 +122,14 @@ module.exports = function (problem, username, gender, age, email, facebook, twit
             }).then(function(data){
                 console.log("analysisEngine'de kayıt başarılı şekilde oluşturuldu. Dönen callback.UserName "+data.UserName);
                 // Burada kaydedilen userı app.js e dönüyorum.
+                // User kayıt bittikten sonra pool'a kaydetmek için kullanılacak sorgu
+                // Bu sorgu user'ın problemine göre problemcategory tablosundaki top değeri dönüyor.
+                /////////////////////////////
+                //
+                //  SELECT id,ProblemCategory FROM problemcategories WHERE id = (SELECT pc.TopCategoryID FROM users u 
+                //  JOIN problems p ON u.ProblemID=p.id JOIN problemcategories pc ON p.ProblemCategoryID=pc.id WHERE u.id=154)
+                //
+                ////////////////////////////
               callback(null,data);
         }, function(e){
             console.log("analysisEngine'de kayıt oluşturulamadı. Hata sonucu : "+e);

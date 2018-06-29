@@ -96,12 +96,12 @@ $(document).ready(function () {
         $("#MsjTextVal").val("");
         updateScroll();
         SaatiGetir();
-        Giden();
+        // Giden(); // Sound
     });
-var path = window.location.href;
+var path = "chat";
     //Scroll sürekli altta kalsın
 function updateScroll() {
-    if (path == "http://localhost/enki/chat.php") {
+    if (path == location.pathname.substring(location.pathname.lastIndexOf("/") + 1)) {
             var element = document.getElementById("ChatBackground");
             element.scrollTop = element.scrollHeight;
        }
@@ -123,7 +123,7 @@ function updateScroll() {
         document.getElementById("ChatBackground").innerHTML += "<div class='MsjBackDiv'><div class='pull-left Clear Time2'>22:30</div><div class='GelenMsj MaxWidth'>" + a + "</div></div>";
         updateScroll();
         SaatiGetir();
-        //Gelen();
+        // Gelen(); // Sound
     };
     //GelenMesaj();
     //setInterval(GelenMesaj, 1000);
@@ -131,13 +131,13 @@ function updateScroll() {
     var gelen = document.getElementById("Gelen");
 
     function Gelen() {
-        if (path == "http://localhost/enki/chat.php") { gelen.play(); }
+        if (path == location.pathname.substring(location.pathname.lastIndexOf("/") + 1)) { gelen.play(); }
     };
 
     var giden = document.getElementById("Giden");
 
     function Giden() {
-        if (path == "http://localhost/enki/chat.php") { giden.play(); }
+        if (path == location.pathname.substring(location.pathname.lastIndexOf("/") + 1)) { giden.play(); }
     };
 
     $(document).on('keydown', function (e) {
