@@ -90,17 +90,29 @@ $(document).ready(function () {
 
 
     //Mesaj Gönder
-    $(".SendBtn").click(function () {
+
+    /*$(".SendBtn").click(function () {
         var str = $("#MsjTextVal").val();
         if (str != "") document.getElementById("ChatBackground").innerHTML += "<div class='MsjBackDiv'><div class='pull-right Clear Time'>22:30</div><div class='GidenMsj MaxWidth'>" + str + "</div></div>";
         $("#MsjTextVal").val("");
         updateScroll();
         SaatiGetir();
         // Giden(); // Sound
-    });
+ });  */
+
+ window.MsgSendJS = function MsgSendJS(){
+        var str = $("#MsjTextVal").val();
+        if (str != "")$("#ChatBackground").append("<div class='MsjBackDiv'><div class='pull-right Clear Time'>22:30</div><div class='GidenMsj MaxWidth'>" + str + "</div></div>");
+        //if (str != "") document.getElementById("ChatBackground").innerHTML += "<div class='MsjBackDiv'><div class='pull-right Clear Time'>22:30</div><div class='GidenMsj MaxWidth'>" + str + "</div></div>";                 
+        $("#MsjTextVal").val("");
+        updateScroll();
+        SaatiGetir();
+        // Giden(); // Sound
+ };
+  
 var path = "chat";
     //Scroll sürekli altta kalsın
-function updateScroll() {
+    window.updateScroll = function updateScroll() {
     if (path == location.pathname.substring(location.pathname.lastIndexOf("/") + 1)) {
             var element = document.getElementById("ChatBackground");
             element.scrollTop = element.scrollHeight;
@@ -140,7 +152,7 @@ function updateScroll() {
         if (path == location.pathname.substring(location.pathname.lastIndexOf("/") + 1)) { giden.play(); }
     };
 
-    $(document).on('keydown', function (e) {
+    /*$(document).on('keydown', function (e) {
         if (e.keyCode == 13) {
             var str = $("#MsjTextVal").val();
             if (str != "") document.getElementById("ChatBackground").innerHTML += "<div class='MsjBackDiv'><div class='pull-right Clear Time'>22:30</div><div class='GidenMsj MaxWidth'>" + str + "</div></div>";
@@ -149,7 +161,7 @@ function updateScroll() {
             SaatiGetir();
             Giden();
         }
-    });
+    });*/
 
 
     function UserBilgiOpen() {

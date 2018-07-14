@@ -14,31 +14,79 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
 
     <script>
-        // Mesaj gelince alttaki çalışıyor
-        /*var socket = io('http://localhost:80');
-        socket.on('connect', function () {
-            socket.emit("channelfixer","red");
-            socket.on('message', function (msg) {
 
-                //$('#right').prepend('<div class="alert alert-info">'+xuname+' Says :'+msg+'</div>');
-                $('#ChatBackground').prepend('<div class="MsjBackDiv"><div class="pull-left Clear Time2">22:30</div><div class="GelenMsj MaxWidth">'+msg+'</div></div>');
+        $(function(){
+            
+            console.log("sockete baglanacak ve register olacak");
+            //var socket = io.connect('http://localhost:3000/chat');
+            if(!socket) {
+                var socket = io();
+            }
+            var username = "bariis";
+            var img = "img";
 
-            });
-            //socket.on('disconnect', function () { });
-        });
+            socket.emit("register",username,img);
 
-        // Mesaj Giderken alttaki çalışıyor
-        $(document).ready(function(){
+            console.log("sockete baglandı ve register edildi");
 
-            socket.emit("register");
+            var message = $("#MsjTextVal").val();
+            var send_message = $("#SendBtn");
+            var chat_room  = $("#ChatBackground");
+            var a='a',b='b';
 
             $("#SendBtn").click(function(){
-                MsjText = $("#MsjTextVal").val();
-                socket.send(MsjText);
-                //socket.emit("channelfixer","red");
-                console.log(MsjText);
+                try{
+                    if($("#MsjTextVal").val()!=""){
+                        console.log("mesaj : "+$("#MsjTextVal").val());
+                        socket.emit("channelfixer","red");
+                        socket.emit('new_message',$("#MsjTextVal").val(),socket.id);
+                        window.MsgSendJS();
+                        console.log("sended.");
+                    }
+                }
+                catch(e){
+                    console.log("uygulama mesaj gönderirken try blogunda hata verdi.");
+                    console.log(e);
+                }
             });
-        });*/
+            
+            $(document).on('keydown', function (e) {
+                if (e.keyCode == 13) {
+                    try{
+                        if($("#MsjTextVal").val()!=""){
+                            socket.emit("channelfixer","red");
+                            console.log("mesaj : "+$("#MsjTextVal").val());
+                            socket.emit('new_message',$("#MsjTextVal").val(),socket.id);
+                            window.MsgSendJS();
+                            console.log("sended.");
+                        }
+                    }
+                    catch(e){
+                        console.log("uygulama mesaj gönderirken try blogunda hata verdi.");
+                        console.log(e);
+                    }
+                }
+            });
+            try{
+                socket.on('connect', function () {
+                    console.log("Socket id= "+socket.id);
+                    socket.emit("register",username,img);
+                    socket.emit("channelfixer","red");
+                    console.log("Kanal red olarak tanımlandı");
+                    socket.on("new_message", function(msg,socketid,uname,imgs) { // buradaki problem çok büyük ihtimalle gelen mesajı dinlememesi
+                        if(socketid!=socket.id){
+                        console.log("Mesaj geldi : "+msg);             // client consolda lenght hatası var onu çöz
+                        $("#ChatBackground").append('<div class="MsjBackDiv"><div class="pull-left Clear Time2">22:30</div><div class="GelenMsj MaxWidth">'+msg+'</div></div>');
+                        window.updateScroll();
+                    }
+                    });
+                });
+            }
+            catch(e){
+                console.log(e);
+            }
+        });
+
     </script>
 </head>
 <body>
@@ -125,7 +173,8 @@
         <div class="col-md-12" id="ChatContainer">
             <div class="ChatBackground Right Left" id="ChatBackground">
                 <div class="MsjBoxTopBlur"></div>
-                <div class="MsjBackDiv">
+                <!--
+                    <div class="MsjBackDiv">
                     <div class="pull-right Clear Time">22:30</div> <div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir sosyal paylaşım platformudur.</div>
                 </div>
                 <div class="MsjBackDiv">
@@ -233,6 +282,7 @@
                 <div class="MsjBackDiv">
                     <div class="pull-left Clear Time2">22:30</div><div class='GelenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devv</div>
                 </div>
+                -->
                 <div class="force-overflow"></div>
 
             </div>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat - Enki Huzurculuk</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/site.css"  type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Josefin+Slab|Poiret+One|Quicksand" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
+
+    <script>
+
+        $(function(){
+            
+            console.log("sockete baglanacak ve register olacak");
+            //var socket = io.connect('http://localhost:3000/chat');
+            if(!socket) {
+                var socket = io();
+            }
+            socket.emit("register");
+            console.log("sockete baglandı ve register edildi");
+
+            var message = $("#MsjTextVal").val();
+            var username = "bariis";
+            var send_message = $("#SendBtn");
+            var chat_room  = $("#ChatBackground");
+
+            send_message.click(function(){
+                try{
+                    socket.emit("channelfixer","red");
+                    console.log("mesaj : "+message);
+                    //socket.send(message.val());
+                    socket.emit('new_message',message);
+                    window.MsgSendJS();
+                    console.log("sended.");
+                }
+                catch(e){
+                    console.log("uygulama mesaj gönderirken try blogunda hata verdi.");
+                    console.log(e);
+                }
+            });
+            
+            $(document).on('keydown', function (e) {
+                if (e.keyCode == 13) {
+                    try{
+                        socket.emit("channelfixer","red");
+                        console.log("mesaj : "+message);
+                        //socket.send(message.val());
+                        socket.emit('new_message',message);
+                        window.MsgSendJS();
+                        console.log("sended.");
+                    }
+                    catch(e){
+                        console.log("uygulama mesaj gönderirken try blogunda hata verdi.");
+                        console.log(e);
+                    }
+                }
+            });
+            try{
+                socket.on('connection', function () {
+                    socket.emit("register");
+                    socket.emit("channelfixer","red");
+                    console.log("Kanal red olarak tanımlandı");
+                    socket.on("new_message", function(data) { // buradaki problem çok büyük ihtimalle gelen mesajı dinlememesi
+                        console.log("data : "+data);            // client consolda lenght hatası var onu çöz
+                        chat_room.prepend('<div class="MsjBackDiv"><div class="pull-left Clear Time2">22:30</div><div class="GelenMsj MaxWidth">'+data.message+'</div></div>');
+                    });
+                });
+            }
+            catch(e){
+                console.log(e);
+            }
+        });
+
+    </script>
+</head>
+<body>
+<div class="blockDiv gizle"></div>
+<nav class="navbar navbar-default header">
+    <div class="container-fluid ">
+        <div class="navbar-header ">
+            <a href="index">Enki</a>
+        </div>
+    </div>
+</nav>
+
+<div class="User-About">
+    <span class="glyphicon glyphicon-user User-About-custom"></span>
+    <div id="bilgiler" class="gizle">
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <h4>Kullanıcı Adı : </h4>
+            </div>
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <b>Bariisarslans</b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <h4>Kullanıcı Adı : </h4>
+            </div>
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <b>Bariisarslans</b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <h4>Kullanıcı Adı : </h4>
+            </div>
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <b>Bariisarslans</b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <h4>Kullanıcı Adı : </h4>
+            </div>
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <b>Bariisarslans</b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <h4>Kullanıcı Adı : </h4>
+            </div>
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <b>Bariisarslans</b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <h4>Kullanıcı Adı : </h4>
+            </div>
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <b>Bariisarslans</b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <h4>Kullanıcı Adı : </h4>
+            </div>
+            <div class="col-md-6 col-xs-6 col-lg-6 User-Info">
+                <b>Bariisarslans</b>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container govdeChat">
+
+    <div class="row">
+        <div class="col-md-12" id="ChatContainer">
+            <div class="ChatBackground Right Left" id="ChatBackground">
+                <div class="MsjBoxTopBlur"></div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div> <div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir sosyal paylaşım platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'> tasarlanmış bir sosyal paylaşım platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayat.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp,      etmeniz için tasarlanmış bir sosyal paylaşım platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'> platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir  paylaşım .</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-left Clear Time2">22:30</div> <div class='GelenMsj MaxWidth'>Burda sizinle   .      .</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-left Clear Time2">22:30</div> <div class='GelenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir  paylaşım .  .</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-left Clear Time2">22:30</div> <div class='GelenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devv</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir sosyal paylaşım platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'> tasarlanmış bir sosyal paylaşım platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayat.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp,      etmeniz için tasarlanmış bir sosyal paylaşım platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'> platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir  paylaşım .</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-left Clear Time2">22:30</div> <div class='GelenMsj MaxWidth'>Burda sizinle   .      .</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-left Clear Time2">22:30</div> <div class='GelenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir  paylaşım .  .</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-left Clear Time2">22:30</div> <div class='GelenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devv</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir sosyal paylaşım platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'> tasarlanmış bir sosyal paylaşım platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayat.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp,      etmeniz için tasarlanmış bir sosyal paylaşım platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'> platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir  paylaşım .</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-left Clear Time2">22:30</div><div class='GelenMsj MaxWidth'>Burda sizinle   .      .</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-left Clear Time2">22:30</div> <div class='GelenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir  paylaşım .  .</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-left Clear Time2">22:30</div><div class='GelenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devv</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir sosyal paylaşım platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'> tasarlanmış bir sosyal paylaşım platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayat.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp,      etmeniz için tasarlanmış bir sosyal paylaşım platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'> platformudur.</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-right Clear Time">22:30</div><div class='GidenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir  paylaşım .</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-left Clear Time2">22:30</div><div class='GelenMsj MaxWidth'>Burda sizinle   .      .</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-left Clear Time2">22:30</div><div class='GelenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devam etmeniz için tasarlanmış bir  paylaşım .  .</div>
+                </div>
+                <div class="MsjBackDiv">
+                    <div class="pull-left Clear Time2">22:30</div><div class='GelenMsj MaxWidth'>Enki, siz tüm dertlerinizden arınıp, huzurlu bir şekilde hayatınıza devv</div>
+                </div>
+                <div class="force-overflow"></div>
+
+            </div>
+            <div class="MsjText">
+                <div class="input-group input-group-lg input-width100 ">
+
+                    <input id="MsjTextVal" type="text" class="form-control input-Custom MsjTextInput" placeholder="Mesajınızı yazın.." aria-describedby="sizing-addon1">
+                    <span id="SendBtn" class="glyphicon glyphicon-send SendBtn"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--<audio id="Gelen">
+        <source src="Sounds/GelenMsj.mp3" type="audio/ogg">
+    </audio>
+    <audio id="Giden">
+        <source src="Sounds/GidenMsj.mp3" type="audio/mpeg">
+    </audio>-->
+
+</div>
+
+
+<!--
+
+<script>
+        for (var i = 0; i < 10; i++)
+        {
+            document.getElementById("ChatBackground").innerHTML += "<div><div class='GidenMsj'>Selam</div>";
+            document.getElementById("ChatBackground").innerHTML += "<div class='GelenMsj'>Selam</div>";
+        };
+</script>
+
+-->
+
+
+
+
+
+<script src="javascripts/site.js"></script>
+
+
+</body>
+</html>

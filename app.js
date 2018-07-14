@@ -1,17 +1,23 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var _ = require('underscore');
-var location = require("./location"); // Buralar ayrı modüllere geçince kaldırılacak.
-var mac = require("getmac"); // Buralar ayrı modüllere geçince kaldırılacak.
-var analysisEngine = require("./analysisEngine");
-var PORT = process.env.PORT || 3000;
-var IP,MAC; // Buralar ayrı modüllere geçince kaldırılacak.
+try{
+  var createError = require('http-errors');
+  var express = require('express');
+  var path = require('path');
+  var cookieParser = require('cookie-parser');
+  var logger = require('morgan');
+  var bodyParser = require('body-parser');
+  var _ = require('underscore');
+  var escape = require('escape-html');
+  var location = require("./location"); // Buralar ayrı modüllere geçince kaldırılacak.
+  var mac = require("getmac"); // Buralar ayrı modüllere geçince kaldırılacak.
+  var analysisEngine = require("./analysisEngine");
+  var PORT = process.env.PORT || 3000;
+  var IP,MAC; // Buralar ayrı modüllere geçince kaldırılacak.
+
+const redis=require('redis');
+	client=redis.createClient();
 
 var app = express();
+var server = require('http').Server(app);
 var db = require("./db"); // Buralar ayrı modüllere geçince kaldırılacak.
 
 // view engine setup
@@ -82,40 +88,78 @@ app.post("/lobi", function(req, res){
     res.render("lobi");
   });
   
+
   app.get('/chat', function(req, res) {
     res.render("chat");
   });
 
-/*
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+}
+catch(e){
+  console.log(e);
+}
+  // CHAT ENGINE
+try{
+  const io = require('socket.io')(server);
+  var channel;
+  io.sockets.on('connection', function(socket) {
+      console.log("Socket.io baglantısı başarılı.");
+      console.log(socket.rooms);
+    socket.on('channelfixer', function(mychannel){
+      channel=mychannel;
+      socket.join(mychannel);
+    });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    socket.on("register",function(myuname , myimage){
+      client.hmset(socket.id,"myuname",myuname,"myimage",myimage); //
+      console.log("register succes");
+    });
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+    console.log('new user connected');
 
-*/
-app.listen(PORT, function(){
+    socket.username = "Anonymous";
+
+
+    socket.on('new_message', function(msg,socketid){
+
+      console.log("Kanal : "+socket.rooms[channel]); // oda olarak odanın ismi veriliyor buraya
+      //console.log("Tüm kanallar : "+socket.rooms);
+
+      client.hgetall(socket.id,function(err, obj){
+        if (err)  { console.log(err);throw err;}
+        console.log("socket.idd : "+socket.id);
+        console.log(obj);
+        xmsg= escape(msg);
+        io.to(socket.rooms[channel]).emit('new_message', xmsg,socketid, obj.myuname, obj.myimage); // Redis sunucuya kurulduğunda 
+      }); // Bu myuname ve myimage parametreleri kaldırılacak.
+      
+    });
+    socket.on('disconnect', function () { });
+
+    server.on('listening',function(){
+      console.log('ok, server is running');
+      });
+      
+  });
+}
+catch(error){
+  console.log("uygulama socket scriptinde, try blogunda hata verdi.");
+  console.log(error);
+}
+  // CHAT ENGINE
+
+
+server.listen(PORT, function(){
   console.log("Express listening on "+ PORT);
 });
 
  // Burası veritabanı sıfırdan oluşması için default hali ayarlanabilir.
-db.sequelize.sync({ force : false}).then(function(){
+/*db.sequelize.sync({ force : false}).then(function(){
   console.log("DB baglantısı ve kurulumu başarılı");
  
   
 }, function(err){
   console.log(err);
   console.log("DB baglantısı veya kurulumu başarısız.");
-})
+})*/
 
 module.exports = app;
