@@ -24,9 +24,10 @@
             }
             var username = "bariis";
             var img = "img";
+            var Kanal = window.location.hash.substring(1,window.location.hash.length);
 
             socket.emit("register",username,img);
-
+            socket.emit("channelfixer",Kanal); // Kanal ismi burda belirlenecek
             console.log("sockete baglandı ve register edildi");
 
             var message = $("#MsjTextVal").val();
@@ -34,11 +35,11 @@
             var chat_room  = $("#ChatBackground");
             var a='a',b='b';
 
-            $("#SendBtn").click(function(){
+            $("#SendBtn").click(function(){ // GİDEN MESAJ
                 try{
                     if($("#MsjTextVal").val()!=""){
                         console.log("mesaj : "+$("#MsjTextVal").val());
-                        socket.emit("channelfixer","red");
+                        //socket.emit("channelfixer","red"); // Kanal ismi yukarıda tek bir yerden belirlendiği için kapatıldı
                         socket.emit('new_message',$("#MsjTextVal").val(),socket.id);
                         window.MsgSendJS();
                         console.log("sended.");
@@ -50,11 +51,11 @@
                 }
             });
             
-            $(document).on('keydown', function (e) {
+            $(document).on('keydown', function (e) { // GİDEN MESAJ
                 if (e.keyCode == 13) {
                     try{
                         if($("#MsjTextVal").val()!=""){
-                            socket.emit("channelfixer","red");
+                            //socket.emit("channelfixer","red"); // Kanal ismi yukarıda tek bir yerden belirlendiği için kapatıldı
                             console.log("mesaj : "+$("#MsjTextVal").val());
                             socket.emit('new_message',$("#MsjTextVal").val(),socket.id);
                             window.MsgSendJS();
@@ -68,16 +69,17 @@
                 }
             });
             try{
-                socket.on('connect', function () {
+                socket.on('connect', function () { // GELEN MESAJ
                     console.log("Socket id= "+socket.id);
                     socket.emit("register",username,img);
-                    socket.emit("channelfixer","red");
+                    //socket.emit("channelfixer","red"); // Kanal ismi yukarıda tek bir yerden belirlendiği için kapatıldı
                     console.log("Kanal red olarak tanımlandı");
                     socket.on("new_message", function(msg,socketid,uname,imgs) { // buradaki problem çok büyük ihtimalle gelen mesajı dinlememesi
                         if(socketid!=socket.id){
                         console.log("Mesaj geldi : "+msg);             // client consolda lenght hatası var onu çöz
-                        $("#ChatBackground").append('<div class="MsjBackDiv"><div class="pull-left Clear Time2">22:30</div><div class="GelenMsj MaxWidth">'+msg+'</div></div>');
-                        window.updateScroll();
+                        $("#ChatBackground").append('<div class="MsjBackDiv"><small class="pull-left Clear Time2"></small><div class="GelenMsj MaxWidth">'+msg+'</div></div>');
+                        window.SaatiGetir();
+                        window.updateScrollGelenMsg();
                     }
                     });
                 });
@@ -171,7 +173,7 @@
 
     <div class="row">
         <div class="col-md-12" id="ChatContainer">
-            <div class="ChatBackground Right Left" id="ChatBackground">
+            <div onscroll="window.schrll()" class="ChatBackground Right Left" id="ChatBackground">
                 <div class="MsjBoxTopBlur"></div>
                 <!--
                     <div class="MsjBackDiv">
@@ -287,7 +289,7 @@
 
             </div>
             <div class="MsjText">
-                <div class="input-group input-group-lg input-width100 ">
+                <div id="MsjBoxContainer" class="input-group input-group-lg input-width100 ">
 
                     <input id="MsjTextVal" type="text" class="form-control input-Custom MsjTextInput" placeholder="Mesajınızı yazın.." aria-describedby="sizing-addon1">
                     <span id="SendBtn" class="glyphicon glyphicon-send SendBtn"></span>

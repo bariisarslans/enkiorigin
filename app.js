@@ -50,17 +50,28 @@ app.post("/lobi", function(req, res){
         res.status(500).send(error);
         return; 
       }
-      else if(Data){
-        res.render("lobi",{ 
-          usrn:Data.UserName, // Db'ye kaydedilen veriyi döndüğü için kolon ismine göre çekmek gerekiyor
-          usrID:Data.id,
-          usrEmail:Data.Email,
-          usrProblemID:Data.ProblemID
-              });
+      else if(Data){ 
+        
+        var Channel = encodeURIComponent('kanal-enkiOrigin'); // Kanal bilgisi buradan değiştirilecek
+        res.redirect("chat#"+Channel); // Şuanda redirect ediyor chat sayfasına
+        // Burada test edilmesi gereken kullanıcı bilgileri gönderebilmek. En azından username gönderiliyor olmalı.
+        // Alttaki render blogu ile if içerisine alınacak. Socket ile dinledikten sonra yönlendirme yapılacak.
+
+        /*res.render("lobi",{ 
+        METHOD:"post",
+        usrn:Data.UserName, // Db'ye kaydedilen veriyi döndüğü için kolon ismine göre çekmek gerekiyor
+        usrID:Data.id,
+        usrEmail:Data.Email,
+        usrProblemID:Data.ProblemID
+        });*/
         console.log(Data.UserName + " Kullanıcısının ID :"+ Data.id );
         console.log(username + " Kullanıcısı için analiz işlemi başarılı şekilde sonlandı.." );
       }
     });
+  });
+
+  app.post('/chat', function(req, res) {
+    res.render('chat');
   });
 
   app.get('/index', function(req, res) {
@@ -72,20 +83,27 @@ app.post("/lobi", function(req, res){
     res.render('index', { title: 'Express' });
   });
   
-  app.get('/lobi', function(req, res) {
+  /*app.get('/lobi', function(req, res) {
     console.log("lobi/get çalıştı");
     db.users.findAll({
         where:{
            // completed : false
         }
     }).then(function(todos){
-        res.json(todos);
-    });
-    //res.render("lobi");
+        //res.json(todos);
+        console.log(JSON.stringify(todos));
+        res.render("lobi",{ 
+          Data:todos
+              });
+    }, function(e){
+      console.log("todos Hata sonucu : "+e);
+      res.status(500).send(e);
   });
+    //res.render("lobi");
+  });*/
 
   app.get('/lobi', function(req, res) {
-    res.render("lobi");
+    res.render("lobi",{METHOD:"get"}); // Get veya post olduğunda ekranda çıkacak alanı düzenle
   });
   
 
@@ -107,6 +125,7 @@ try{
     socket.on('channelfixer', function(mychannel){
       channel=mychannel;
       socket.join(mychannel);
+      
     });
 
     socket.on("register",function(myuname , myimage){

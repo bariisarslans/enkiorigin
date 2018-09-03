@@ -102,11 +102,10 @@ $(document).ready(function () {
 
  window.MsgSendJS = function MsgSendJS(){
         var str = $("#MsjTextVal").val();
-        if (str != "")$("#ChatBackground").append("<div class='MsjBackDiv'><div class='pull-right Clear Time'>22:30</div><div class='GidenMsj MaxWidth'>" + str + "</div></div>");
-        //if (str != "") document.getElementById("ChatBackground").innerHTML += "<div class='MsjBackDiv'><div class='pull-right Clear Time'>22:30</div><div class='GidenMsj MaxWidth'>" + str + "</div></div>";                 
+        if (str != "")$("#ChatBackground").append("<div class='MsjBackDiv'><small class='pull-right Clear Time'></small><div class='GidenMsj MaxWidth'>" + str + "</div></div>");
+        SaatiGetir();                
         $("#MsjTextVal").val("");
         updateScroll();
-        SaatiGetir();
         // Giden(); // Sound
  };
   
@@ -119,24 +118,80 @@ var path = "chat";
        }
     };
 
+    function DownBtnCreator(){
+        if(!document.getElementById("downBtn")){
+            var btn = document.createElement('span');
+            btn.id="downBtn";
+            btn.className="glyphicon glyphicon-chevron-down SendBtn";
+            btn.addEventListener( 'click', function(){updateScroll()} );
+            btn.style.backgroundColor="#B22222"; 
+            btn.style.color="#ffffff";
+            btn.style.zIndex="10001";
+            document.getElementById("MsjBoxContainer").appendChild(btn);   
+        }
+    }
+
+    function RemoveDownBtn(){
+        if(document.getElementById("downBtn")){
+            var item = document.getElementById("downBtn");
+            item.parentNode.removeChild(item);
+            console.log("downbtn ifine girdi ve kaldırdı");
+        }
+    }
+
+    var userHasScrolled = false;
+    window.schrll = function (e) // scroll yapılıp yapılmadığını kontrol ediyor. Eğer yapıldıysa ama en alta indirildiyse yapılmamış varsayıyor. 
+    {
+        if (path == location.pathname.substring(location.pathname.lastIndexOf("/") + 1)) {
+            var element = document.getElementById("ChatBackground");
+            if((element.scrollTop+element.clientHeight)==element.scrollHeight || 
+                element.scrollHeight-(element.scrollTop+element.clientHeight)<=15)
+            {
+                userHasScrolled = false;
+                RemoveDownBtn();
+                //console.log("userHasScrolled : "+userHasScrolled);
+                //console.log("Scroll Barın tabana uzaklığı : "+(element.scrollHeight-(element.scrollTop+element.clientHeight)));
+            }
+            else{
+                userHasScrolled = true;
+                DownBtnCreator();
+                //console.log("userHasScrolled : "+userHasScrolled);
+                //console.log("Scroll Barın tabana uzaklığı : "+(element.scrollHeight-(element.scrollTop+element.clientHeight)));
+            }
+        } // neden nan geldiğini aaraştır. Konsoldan dene
+        
+    }
+
+    window.updateScrollGelenMsg = function updateScrollGelenMsg() {
+        if (path == location.pathname.substring(location.pathname.lastIndexOf("/") + 1)) {
+            var element = document.getElementById("ChatBackground");
+            if(userHasScrolled==false){
+                element.scrollTop = element.scrollHeight;
+            }
+        }
+    };
+
     //Saat
-    function SaatiGetir() {
+    window.SaatiGetir = function SaatiGetir() {
         var d = new Date();
         var n = d.getHours() + ":" + d.getMinutes();
-        $('.Time').text(n);
-        $('.Time2').text(n);
+        document.getElementsByTagName("small")[document.getElementsByTagName("small").length - 1].innerHTML = n;
     };
    
 
 
     // Jest :)
     function GelenMesaj() {
-        var a = "Test";
-        document.getElementById("ChatBackground").innerHTML += "<div class='MsjBackDiv'><div class='pull-left Clear Time2'>22:30</div><div class='GelenMsj MaxWidth'>" + a + "</div></div>";
-        updateScroll();
-        SaatiGetir();
+            for(var i=0;i<25;i++){
+                var a = "Test";
+                document.getElementById("ChatBackground").innerHTML += "<div class='MsjBackDiv'><div class='pull-left Clear Time2'>22:30</div><div class='GelenMsj MaxWidth'>" + a + "</div></div>";
+                updateScrollGelenMsg();
+                //SaatiGetir();
+            }
+        
         // Gelen(); // Sound
     };
+    window.onload=GelenMesaj();
     //GelenMesaj();
     //setInterval(GelenMesaj, 1000);
 
