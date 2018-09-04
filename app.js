@@ -14,7 +14,7 @@ try{
   var IP,MAC; // Buralar ayrı modüllere geçince kaldırılacak.
 
 const redis=require('redis');
-	client=redis.createClient();
+	client=redis.createClient(process.env.REDIS_URL);
 
 var app = express();
 var server = require('http').Server(app);
