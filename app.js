@@ -11,6 +11,7 @@ try{
   var mac = require("getmac"); // Buralar ayrı modüllere geçince kaldırılacak.
   var analysisEngine = require("./analysisEngine");
   var PORT = process.env.PORT || 3000;
+  
   var IP,MAC; // Buralar ayrı modüllere geçince kaldırılacak.
 
 const redis=require('redis');
@@ -51,21 +52,36 @@ app.post("/lobi", function(req, res){
         return; 
       }
       else if(Data){ 
-        
-        var Channel = encodeURIComponent('kanal-enkiOrigin'); // Kanal bilgisi buradan değiştirilecek
-        res.redirect("chat#"+Channel); // Şuanda redirect ediyor chat sayfasına
-        // Burada test edilmesi gereken kullanıcı bilgileri gönderebilmek. En azından username gönderiliyor olmalı.
-        // Alttaki render blogu ile if içerisine alınacak. Socket ile dinledikten sonra yönlendirme yapılacak.
+        if(0>1){
+/*
+          const io = require('socket.io')(server);
+          var channel;
+          io.sockets.on('connection', function(socket) {
+              console.log("Socket.io baglantısı başarılı.");
+              console.log(socket.rooms);
+            socket.on('channelfixer', function(mychannel){
+              channel=mychannel;
+              socket.join(mychannel);
+              
+            });
+          // Burada test edilmesi gereken kullanıcı bilgileri gönderebilmek. En azından username gönderiliyor olmalı.
+         // Alttaki render blogu ile if içerisine alınacak. Socket ile dinledikten sonra yönlendirme yapılacak.
 
-        /*res.render("lobi",{ 
-        METHOD:"post",
-        usrn:Data.UserName, // Db'ye kaydedilen veriyi döndüğü için kolon ismine göre çekmek gerekiyor
-        usrID:Data.id,
-        usrEmail:Data.Email,
-        usrProblemID:Data.ProblemID
+         res.render("lobi",{ 
+         METHOD:"post",
+         usrn:Data.UserName, // Db'ye kaydedilen veriyi döndüğü için kolon ismine göre çekmek gerekiyor
+         usrID:Data.id,
+         usrEmail:Data.Email,
+         usrProblemID:Data.ProblemID
+         });
+         console.log(Data.UserName + " Kullanıcısının ID :"+ Data.id );
+         console.log(username + " Kullanıcısı için analiz işlemi başarılı şekilde sonlandı.." );
         });*/
-        console.log(Data.UserName + " Kullanıcısının ID :"+ Data.id );
-        console.log(username + " Kullanıcısı için analiz işlemi başarılı şekilde sonlandı.." );
+        }else{
+          var Channel = encodeURIComponent('kanal-enkiOrigin'); // Kanal bilgisi buradan değiştirilecek
+          res.redirect("chat#"+Channel); // Şuanda redirect ediyor chat sayfasına
+         
+       }
       }
     });
   });
